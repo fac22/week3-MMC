@@ -20,8 +20,9 @@ const home = require("./routes/home.js");
 // server.use(cookieParser(process.env.COOKIE_SECRET));
 
 server.get("/", home.get);
+// server.get("/log-in", logIn.get);
 
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 3003;
 
 process.on("unhandledRejection", (error) => {
   console.error(error);
