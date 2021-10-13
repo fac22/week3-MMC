@@ -2,4 +2,11 @@
 
 const model = require("../database/model.js");
 
-module.exports = {};
+function get(request, response) {
+  const html = /*html*/ `
+    <h1> hello world </h1>
+    `;
+  response.send(html);
+}
+
+module.exports = { get };
