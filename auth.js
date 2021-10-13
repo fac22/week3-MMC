@@ -5,10 +5,11 @@ const bcrypt = require('bcryptjs');
 const model = require('./database/model.js');
 
 function createUserAuth(email, password, name) {
+  console.log('createUser from auth.js running');
   return bcrypt
     .hash(password, 10)
-    .then((hashedPassword) => model.createUser(email, hashedPassword, name))
-    .catch((error) => console.error(error + 'CREATE USER ERROR'));
+    .then((hashedPassword) => model.createUser(email, hashedPassword, name));
+  // .catch((error) => console.error(error + 'CREATE USER ERROR'));
 }
 
-module.exports = {};
+module.exports = { createUserAuth };

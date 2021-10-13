@@ -2,6 +2,7 @@
 
 const express = require('express');
 const cookieParser = require('cookie-parser');
+const bodyParser = express.urlencoded({ extended: false });
 const dotenv = require('dotenv');
 dotenv.config();
 
@@ -24,7 +25,7 @@ const signUp = require('./routes/signup.js');
 server.get('/', home.get);
 
 server.get('/sign-up', signUp.get);
-server.post('/sign-up', signUp.post);
+server.post('/sign-up', bodyParser, signUp.post);
 
 // server.get("/log-in", logIn.get);
 

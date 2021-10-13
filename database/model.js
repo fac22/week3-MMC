@@ -4,7 +4,8 @@ const database = require('./connection.js');
 
 // Function needs to be passed hashedPassword from auth.js
 function createUser(email, hashedPassword, name) {
-  const INSERT_USER = `INSERT INTO users (email, password, name) VALUES ($1, $2, $3)`;
+  const INSERT_USER = `INSERT INTO users (email, password, name) VALUES ($1, $2, $3)
+  RETURNING id, email, name;`;
   return database
     .query(INSERT_USER, [email, hashedPassword, name])
     .then((user) => user.rows[0]);
@@ -17,4 +18,4 @@ function getUser(email) {
   return database.query(SELECT_USER, [email]).then((user) => user.rows[0]);
 }
 
-module.exports = {};
+module.exports = { createUser, getUser };
