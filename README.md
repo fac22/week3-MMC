@@ -8,7 +8,8 @@ Authentication Project Week 03
 
 #### Page flow
 
-![Tux, the Linux mascot](./README/wireframe-01.png)
+![Database Schema](./README/schema.png)
+![Page-Flow](./README/page-flow.png)
 
 ### 🧱 Features
 
