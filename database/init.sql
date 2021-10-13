@@ -14,12 +14,12 @@ CREATE TABLE sessions (
    data JSON NOT NULL
 );
 
-CREATE TABLE posts (
-    id SERIAL PRIMARY KEY,
-    user_id INTEGER REFERENCES users(id) ON DELETE CASCADE,
-    text_content text,
-    created_at timestamp
-);
+-- CREATE TABLE posts (
+--     id SERIAL PRIMARY KEY,
+--     user_id INTEGER REFERENCES users(id) ON DELETE CASCADE,
+--     text_content text,
+--     created_at timestamp
+-- );
 
 INSERT INTO users (email, password, name) VALUES
 (
@@ -34,8 +34,8 @@ INSERT INTO sessions (sid, data) VALUES
   '{"test":"stuff"}'
 );
 
-INSERT INTO posts ( user_id, text_content, created_at) VALUES
-  (1,  'What is your favorite colour?', (SELECT CURRENT_TIMESTAMP)),
-  (1,  'What is your favorite animal?', (SELECT CURRENT_TIMESTAMP));
+-- INSERT INTO posts ( user_id, text_content, created_at) VALUES
+--   (1,  'What is your favorite colour?', (SELECT CURRENT_TIMESTAMP)),
+--   (1,  'What is your favorite animal?', (SELECT CURRENT_TIMESTAMP));
 
 COMMIT;
