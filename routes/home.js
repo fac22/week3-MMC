@@ -1,12 +1,11 @@
 "use strict";
 
+const html = require("../routes/html.js");
+
 const model = require("../database/model.js");
 
 function get(request, response) {
-  const html = /*html*/ `
-    <h1> hello world </h1>
-    `;
-  response.send(html);
+  response.send(html("<h1>  hello world</h1>"));
 }
 
 module.exports = { get };
