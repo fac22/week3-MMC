@@ -23,7 +23,7 @@ const signUp = require('./routes/signUp.js');
 // server.use(cookieParser(process.env.COOKIE_SECRET));
 
 server.get('/', home.get);
-server.post('/', home.post);
+server.post('/', bodyParser, home.post);
 
 server.get('/sign-up', signUp.get);
 server.post('/sign-up', bodyParser, signUp.post);

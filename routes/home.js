@@ -33,6 +33,7 @@ function post(request, response){
     signed: true,
   }))
   .then(() => response.redirect("sign-up"))
+  .catch((error) => console.error(error + "User not found"));
 }
 
 
