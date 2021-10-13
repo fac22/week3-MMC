@@ -21,9 +21,13 @@ const signUp = require("./routes/signUp");
 // server.use(cookieParser(process.env.COOKIE_SECRET));
 
 server.get("/", home.get);
+
+server.get("/log-in", logIn.get);
+
 server.get("/sign-up", signUp.get);
 
-const PORT = process.env.PORT || 3000;
+
+const PORT = process.env.PORT || 3003;
 
 process.on("unhandledRejection", (error) => {
   console.error(error);
