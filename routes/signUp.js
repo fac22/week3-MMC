@@ -1,23 +1,18 @@
-"use strict";
+'use strict';
 
-const html = require("../routes/html.js");
-
-const auth = require("../auth.js");
+const html = require('../routes/html.js');
+const auth = require('../auth.js');
 
 function get(request, response) {
-  response.send(
-    html(`
-    <section>
+  const html1 = `<section>
     <h1>Create an account</h1>
-    <form>
+    <form method="POST">
     <label for="username">
-    Username
+    Name
     <span aria-hidden="true">*</span>
   </label>
   <input id="username" type="username" aria-describedby="usernameError" required />
   <div id="usernameError" class="error"></div>
-
-
       <label for="email">
         Email
         <span aria-hidden="true">*</span>
@@ -38,17 +33,23 @@ function get(request, response) {
         type="password"
         aria-describedby="passwordRequirements passwordError"
         required
-        pattern=".*\d.*"
         minlength="3"
       />
       <div id="passwordError" class="error"></div>
       <button>Sign up</button>
     </form>
-</section>
-`)
-  );
+</section>`;
+
+  response.send(html);
+}
+
+function post(request, response) {
+  const { name, email, password } = request.body;
+  auth
+    .createUserAuth(email, password, name)
+    .catch((error) => console.error(error + 'CREATE USER ERROR'));
 }
 
 // name email password
 
-module.exports = { get };
+module.exports = { get, post };
