@@ -8,6 +8,7 @@ dotenv.config();
 const server = express();
 
 const home = require("./routes/home.js");
+const signUp = require("./routes/signUp");
 // const logIn = require("./routes/logIn.js");
 // const signUp = require("./routes/signUp.js");
 // const logOut = require("./routes/logOut.js");
@@ -20,7 +21,11 @@ const home = require("./routes/home.js");
 // server.use(cookieParser(process.env.COOKIE_SECRET));
 
 server.get("/", home.get);
-// server.get("/log-in", logIn.get);
+
+server.get("/log-in", logIn.get);
+
+server.get("/sign-up", signUp.get);
+
 
 const PORT = process.env.PORT || 3003;
 
