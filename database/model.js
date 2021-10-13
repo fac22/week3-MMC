@@ -1,4 +1,6 @@
-const db = require('./connection.js');
+"use strict";
+
+const db = require("./connection.js");
 
 function createUser(email, hash, name) {
   const INSERT_USER = `
@@ -18,7 +20,7 @@ function getUser(email) {
 }
 
 function getSession(sid) {
-  const SELECT_SESSION = 'SELECT data FROM sessions WHERE sid=$1';
+  const SELECT_SESSION = "SELECT data FROM sessions WHERE sid=$1";
   return db.query(SELECT_SESSION, [sid]).then((result) => {
     const singleResult = result.rows[0];
     return singleResult && singleResult.data;
@@ -36,7 +38,7 @@ function createSession(sid, data) {
 }
 
 function deleteSession(sid) {
-  const DELETE_SESSION = 'DELETE FROM sessions WHERE sid=$1';
+  const DELETE_SESSION = "DELETE FROM sessions WHERE sid=$1";
   return db.query(DELETE_SESSION, [sid]);
 }
 

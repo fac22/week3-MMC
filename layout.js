@@ -1,3 +1,5 @@
+"use strict";
+
 function layout(title, content) {
   return `
     <!DOCTYPE html>

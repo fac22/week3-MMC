@@ -1,6 +1,8 @@
-const layout = require('../layout');
-const model = require('../database/model.js');
-const db = require('../database/connection');
+"use strict";
+
+const layout = require("../layout");
+const model = require("../database/model.js");
+const db = require("../database/connection");
 
 function htmlPostForm() {
   return `
@@ -18,7 +20,7 @@ function htmlPostForm() {
 }
 
 function displayPosts() {
-  return db.query('SELECT * FROM posts').then((result) => {
+  return db.query("SELECT * FROM posts").then((result) => {
     const posts = result.rows;
     const postContent = posts
       .map(
@@ -33,7 +35,7 @@ function displayPosts() {
       </form>
       </div>`
       )
-      .join('');
+      .join("");
 
     return `
     <section>
@@ -62,10 +64,10 @@ function post(request, response) {
 
         return model.createPost(user_id, text_content);
       })
-      .then(response.redirect('/posts'));
+      .then(response.redirect("/posts"));
   }
 
-  response.redirect('/log-in');
+  response.redirect("/log-in");
 }
 
 function deletePost(request, response) {
@@ -82,14 +84,14 @@ function deletePost(request, response) {
 
       if (userId === postUserId) {
         return model.deletePost(postId).then(() => {
-          response.redirect('/posts');
+          response.redirect("/posts");
         });
       } else {
-        response.redirect('/posts');
+        response.redirect("/posts");
       }
     });
   } else {
-    response.redirect('/posts');
+    response.redirect("/posts");
   }
 }
 

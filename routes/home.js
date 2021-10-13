@@ -1,4 +1,6 @@
-const model = require('../database/model.js');
+"use strict";
+
+const model = require("../database/model.js");
 
 function get(request, response) {
   const sid = request.signedCookies.sid;

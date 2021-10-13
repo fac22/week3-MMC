@@ -1,4 +1,6 @@
-const auth = require('../auth.js');
+"use strict";
+
+const auth = require("../auth.js");
 
 function get(request, response) {
   response.send(`
@@ -21,8 +23,8 @@ function post(request, response) {
     .createUser(email, password, name)
     .then(auth.saveUserSession)
     .then((sid) => {
-      response.cookie('sid', sid, auth.COOKIE_OPTIONS);
-      response.redirect('/');
+      response.cookie("sid", sid, auth.COOKIE_OPTIONS);
+      response.redirect("/");
     })
     .catch((error) => {
       console.error(error);
