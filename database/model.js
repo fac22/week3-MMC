@@ -15,12 +15,13 @@ function createUser(email, hashedPassword, name) {
 // GET user from email
 // Email is UNIQUE
 function getUser(email) {
-  const SELECT_USER = 'SELECT * FROM users WHERE email=$1';
+  const SELECT_USER =
+    'SELECT id, email, password, name FROM users WHERE email=$1';
   return database.query(SELECT_USER, [email]).then((user) => user.rows[0]);
 }
 
 function getSession(sid) {
-  const SELECT_SESSION = "SELECT data FROM sessions WHERE sid=$1";
+  const SELECT_SESSION = 'SELECT data FROM sessions WHERE sid=$1';
   return database.query(SELECT_SESSION, [sid]).then((result) => {
     const singleResult = result.rows[0];
     return singleResult && singleResult.data;

@@ -10,10 +10,10 @@ function verifyUser(email, password) {
     .then((user) => bcrypt.compare(password, user.password))
     .then((user) => {
       if (!user) {
-        throw new Error("Password mismatch");
+        throw new Error('Password mismatch');
       } else {
         // make sure we never return the password
-        delete user.password;
+        // delete user.password;
         return user;
       }
     });
@@ -28,9 +28,8 @@ function createUserAuth(email, password, name) {
 }
 
 function saveUserSession(user) {
-  const sid = crypto.randomBytes(18).toString("base64");
+  const sid = crypto.randomBytes(18).toString('base64');
   return model.createSession(sid, { user });
 }
-
 
 module.exports = { createUserAuth, verifyUser, saveUserSession };

@@ -8,8 +8,12 @@ dotenv.config();
 
 const server = express();
 
-const home = require('./routes/home.js');
-const signUp = require('./routes/signUp.js');
+const signUp = require('./routes/signup.js');
+const login = require('./routes/logIn.js');
+
+server.use(express.urlencoded({ extended: false }));
+
+server.use(cookieParser(process.env.COOKIE_SECRET));
 
 // const logIn = require("./routes/logIn.js");
 // const signUp = require("./routes/signUp.js");
@@ -22,11 +26,14 @@ const signUp = require('./routes/signUp.js');
 // it is used to sign cookies so we can trust them
 // server.use(cookieParser(process.env.COOKIE_SECRET));
 
-server.get('/', home.get);
-server.post('/', bodyParser, home.post);
+// server.get('/', home.get);
+// server.post('/', home.post);
+
+server.post('/', login.post);
+server.get('/', login.get);
 
 server.get('/sign-up', signUp.get);
-server.post('/sign-up', bodyParser, signUp.post);
+server.post('/sign-up', signUp.post);
 
 // server.get("/log-in", logIn.get);
 

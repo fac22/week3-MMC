@@ -29,6 +29,7 @@ Authentication Project Week 03
 
 - Always add `bodyParser` otherwise the `body.response` will returned `undefined`
 - Make sure to `module.exports` functions
+- Do not `modularise` code from the start (jumping around is a nightmare 😔)
 
 ### 🧪 Testing
 
