@@ -27,7 +27,8 @@ Authentication Project Week 03
 
 ### 📚 What we learnt
 
-- How to create a database with `PostgreSQL`
+- Always add `bodyParser` otherwise the `body.response` will returned `undefined`
+- Make sure to `module.exports` functions
 
 ### 🧪 Testing
 
@@ -36,13 +37,5 @@ Authentication Project Week 03
 - [x] `Cypress` reset state between each test
 
 ### ⏳ Future improvements
-
-- [ ] Modularise all code
-- [ ] Sign-up and Login
-- [ ] Buy button
-- [ ] Delete button
-- [ ] No time button
-- [ ] No user registration
-- [ ] CI Testing on GitHub
 
 ### 👀 Screenshots

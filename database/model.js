@@ -4,6 +4,7 @@ const database = require('./connection.js');
 
 // Function needs to be passed hashedPassword from auth.js
 function createUser(email, hashedPassword, name) {
+  console.log('createUser from model.js running');
   const INSERT_USER = `INSERT INTO users (email, password, name) VALUES ($1, $2, $3)
   RETURNING id, email, name;`;
   return database
