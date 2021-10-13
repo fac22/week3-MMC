@@ -9,7 +9,7 @@ dotenv.config();
 const server = express();
 
 const home = require('./routes/home.js');
-const signUp = require('./routes/signup.js');
+const signUp = require('./routes/signUp.js');
 
 // const logIn = require("./routes/logIn.js");
 // const signUp = require("./routes/signUp.js");
@@ -23,6 +23,7 @@ const signUp = require('./routes/signup.js');
 // server.use(cookieParser(process.env.COOKIE_SECRET));
 
 server.get('/', home.get);
+server.post('/', home.post);
 
 server.get('/sign-up', signUp.get);
 server.post('/sign-up', bodyParser, signUp.post);

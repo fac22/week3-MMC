@@ -3,6 +3,7 @@
 const html = require("../routes/html.js");
 
 const model = require("../database/model.js");
+const auth = require("../auth.js");
 
 // login form
 function get(request, response) {
@@ -21,5 +22,18 @@ function get(request, response) {
 }
 
 
+function post(request, response){
+  const {email, password} = request.body;
+  auth.verifyUser(email)
+  .then((user) => auth.saveUserSession(user))
+  .then((sid) => response.cookie("sid", sid, {
+    httpOnly: true,
+    maxAge: 600000,
+    sameSite: "strict",
+    signed: true,
+  }))
+  .then(() => response.redirect("sign-up"))
+}
 
-module.exports = { get };
+
+module.exports = { get, post };
