@@ -44,10 +44,18 @@ function createReview(userID, film, rating) {
 }
 
 function getReviews(userID) {
-  const SELECT_REVIEWS = `SELECT film, rating FROM potatoes WHERE reviewer = $1`;
+  const SELECT_REVIEWS = `SELECT id, film, rating FROM potatoes WHERE reviewer = $1`;
   return database.query(SELECT_REVIEWS, [userID]).then((review) => review.rows);
 }
 
+
+function deleteReview(id) {
+  console.log('DELETE REVIEW MODEL.JS');
+  const DELETE_REVIEW = `
+  DELETE FROM potatoes WHERE id=$1;`;
+  return database.query(DELETE_REVIEW, [id]);
+}
+  
 function deleteSession(sid) {
   const DELETE_SESSION = 'DELETE FROM sessions WHERE sid=$1';
   return database.query(DELETE_SESSION, [sid]);
@@ -60,5 +68,9 @@ module.exports = {
   createSession,
   createReview,
   getReviews,
-  deleteSession,
+
+  deleteReview,
+
+  deleteSession
+
 };

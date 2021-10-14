@@ -6,13 +6,14 @@ const html = require('../routes/html.js');
 
 async function get(request, response) {
   const { id } = await model.getSession(request.signedCookies.sid);
-  console.log(await model.getReviews(id));
-
   const reviews = await model.getReviews(id);
   const reviewHTML = reviews
-    .map((review) => `<li> ${review.film} - ${review.rating}</li>`)
+
+    .map((review) => {
+      return `<form method="POST" action='/delete'><li> ${review.film} - ${review.rating} - <button name='delete' value='${review.id}'>Delete</button></li></form>`;
+    })
     .join('');
-  // console.log(model.getReviews(id));
+
   const HTML = `
  <ul>${reviewHTML} </ul>
   
@@ -47,4 +48,12 @@ async function post(request, response) {
   return model.createReview(id, film, rating);
 }
 
-module.exports = { get, post };
+async function deleteReview(request, response) {
+  console.log('DELETE FUNCTION IN PROFILE.JS');
+  const body = await request.body;
+  return model
+    .deleteReview(body.delete)
+    .then(() => response.redirect('/profile'));
+}
+
+module.exports = { get, post, deleteReview };
