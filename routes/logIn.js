@@ -12,7 +12,6 @@ function get(request, response) {
     response.redirect('/profile');
   }
   //   response.send('<h1>Hello 😢</h1>');
-
   response.send(
     html(
       `<h1>Hello, welcome to MMC!</h1>
@@ -28,7 +27,6 @@ function get(request, response) {
       rs
       <button>Sign-Up</button>
       </form>
-
     `
     )
   );
