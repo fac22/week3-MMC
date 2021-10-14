@@ -1,12 +1,23 @@
-'use strict';
+"use strict";
 
-const model = require('../database/model.js');
-const db = require('../database/connection');
-const html = require('../routes/html.js');
+const model = require("../database/model.js");
+const db = require("../database/connection");
+const html = require("../routes/html.js");
 
-function get(request, response) {
-  const HTML = `  
+async function get(request, response) {
+  const { id } = await model.getSession(request.signedCookies.sid);
+  console.log(await model.getReviews(id));
+
+  const reviews = await model.getReviews(id);
+  const reviewHTML = reviews
+    .map((review) => `<li> ${review.film} - ${review.rating}</li>`)
+    .join("");
+  // console.log(model.getReviews(id));
+  const HTML = `
+ <ul>${reviewHTML} </ul>
+  
     <form action="profile" method="POST">
+    
     <h2>Add a new film</h2>
         <label for="film">Film Title</label>
         <input type="text" id="film" name="film" placeholder="Please enter the title of the film" required>
@@ -23,12 +34,12 @@ function get(request, response) {
     <button>Add Review 🍟</button>
     </form>
 `;
-  return response.send(html.htmlBuilder('Profile Page', HTML));
+  return response.send(html.htmlBuilder("Profile Page", HTML));
 }
 
 async function post(request, response) {
   const { id } = await model.getSession(request.signedCookies.sid);
-  console.log(id, 'User Data 🔗');
+  console.log(id, "User Data 🔗");
   const { film, rating } = await request.body;
   return model.createReview(id, film, rating);
 }
