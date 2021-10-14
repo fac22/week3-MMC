@@ -4,19 +4,33 @@ const crypto = require('crypto');
 const bcrypt = require('bcryptjs');
 const model = require('./database/model.js');
 
-function verifyUser(email, password) {
-  return model
-    .getUser(email)
-    .then((user) => bcrypt.compare(password, user.password))
-    .then((user) => {
-      if (!user) {
-        throw new Error('Password mismatch');
-      } else {
-        // make sure we never return the password
-        // delete user.password;
-        return user;
-      }
-    });
+// function verifyUser(email, password) {
+//   return model
+//     .getUser(email)
+//     .then((user) => bcrypt.compare(password, user.password))
+//     .then((user) => {
+//       if (!user) {
+//         throw new Error('Password mismatch');
+//       } else {
+//         // make sure we never return the password
+//         // delete user.password;
+//         return user;
+//       }
+//     });
+// }
+
+async function verifyUser(email, password) {
+  const userDetails = await model.getUser(email);
+  const passwordCompare = await bcrypt.compare(password, userDetails.password);
+
+  if (!passwordCompare) {
+    throw new Error('Password mismatch');
+  } else {
+    // make sure we never return the password
+    // delete user.password;
+    delete userDetails.password;
+    return userDetails;
+  }
 }
 
 function createUserAuth(email, password, name) {
