@@ -4,17 +4,16 @@ const auth = require('../auth.js');
 const html = require('./html.js');
 
 function get(request, response) {
-  const HTML = `<h1>Hello, welcome to MMC!</h1>
+  const HTML = `<h1>Hello, welcome to Mouldy Potatoes</h1>
       <h2>Log in here</h2>
       <form action="/" method="POST">
-        <label for="email">Email</label>
+        <label for="email">Email<span aria-hidden="true">*</span></label>
         <input type="email" id="email" name="email" required>
-        <label for="password">Password</label>
+        <label for="password">Password<span aria-hidden="true">*</span></label>
         <input type="password" id="password" name="password" required>
         <button>Log in</button>
       </form>
       <form action="sign-up">
-      rs
       <button>Sign-Up</button>
       </form>
     `;
