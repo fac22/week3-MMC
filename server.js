@@ -9,6 +9,7 @@ const server = express();
 const signup = require('./routes/signup.js');
 const login = require('./routes/login.js');
 const profile = require('./routes/profile.js');
+const logOut = require('./routes/logOut.js');
 
 server.use(express.urlencoded({ extended: false }));
 server.use(express.static('./public'));
@@ -21,6 +22,7 @@ server.post('/', login.post);
 server.get('/', login.get);
 server.get('/sign-up', signup.get);
 server.post('/sign-up', signup.post);
+server.post('/log-out', logOut.post);
 
 const PORT = process.env.PORT || 3003;
 
