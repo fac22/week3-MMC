@@ -1,7 +1,7 @@
 'use strict';
 
 const auth = require('../auth.js');
-
+const profile = require('../routes/profile.js');
 const html = require('../routes/html.js');
 
 // log in form
@@ -9,7 +9,7 @@ const html = require('../routes/html.js');
 function get(request, response) {
   const sid = request.signedCookies.sid;
   if (sid) {
-    response.send(`<h1>Hello PERSON WITH ${sid}</h1>`);
+    response.redirect('/profile');
   }
   //   response.send('<h1>Hello 😢</h1>');
 
@@ -25,6 +25,7 @@ function get(request, response) {
         <button>Log in</button>
       </form>
       <form action="sign-up">
+      rs
       <button>Sign-Up</button>
       </form>
 

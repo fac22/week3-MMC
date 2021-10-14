@@ -10,24 +10,13 @@ const server = express();
 
 const signUp = require('./routes/signup.js');
 const login = require('./routes/logIn.js');
+const profile = require('./routes/profile.js');
 
 server.use(express.urlencoded({ extended: false }));
 
 server.use(cookieParser(process.env.COOKIE_SECRET));
 
-// const logIn = require("./routes/logIn.js");
-// const signUp = require("./routes/signUp.js");
-// const logOut = require("./routes/logOut.js");
-// const posts = require("./routes/posts.js");
-
-// server.use(express.urlencoded({ extended: false }));
-
-// COOKIE_SECRET lives in .env to stop it ending up on GitHub
-// it is used to sign cookies so we can trust them
-// server.use(cookieParser(process.env.COOKIE_SECRET));
-
-// server.get('/', home.get);
-// server.post('/', home.post);
+server.get('/profile', profile.get);
 
 server.post('/', login.post);
 server.get('/', login.get);

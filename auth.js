@@ -43,7 +43,7 @@ function createUserAuth(email, password, name) {
 
 function saveUserSession(user) {
   const sid = crypto.randomBytes(18).toString('base64');
-  return model.createSession(sid, { user });
+  return model.createSession(sid, user);
 }
 
 module.exports = { createUserAuth, verifyUser, saveUserSession };
