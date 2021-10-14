@@ -2,7 +2,6 @@
 
 const database = require('./connection.js');
 
-// Function needs to be passed hashedPassword from auth.js
 function createUser(email, hashedPassword, name) {
   console.log('createUser from model.js running');
   const INSERT_USER = `INSERT INTO users (email, password, name) VALUES ($1, $2, $3)
@@ -12,8 +11,6 @@ function createUser(email, hashedPassword, name) {
     .then((user) => user.rows[0]);
 }
 
-// GET user from email
-// Email is UNIQUE
 function getUser(email) {
   const SELECT_USER =
     'SELECT id, email, password, name FROM users WHERE email=$1';
@@ -38,4 +35,18 @@ function createSession(sid, data) {
     .then((result) => result.rows[0].sid);
 }
 
-module.exports = { createUser, getUser, getSession, createSession };
+function createReview(userID, film, rating) {
+  const INSERT_REVIEW = `
+  INSERT INTO potatoes (reviewer, film, rating) VALUES ($1, $2, $3);`;
+  return database
+    .query(INSERT_REVIEW, [userID, film, rating])
+    .then((review) => review.rows[0]);
+}
+
+module.exports = {
+  createUser,
+  getUser,
+  getSession,
+  createSession,
+  createReview,
+};

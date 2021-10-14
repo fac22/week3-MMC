@@ -16,6 +16,7 @@ server.use(cookieParser(process.env.COOKIE_SECRET));
 dotenv.config();
 
 server.get('/profile', profile.get);
+server.post('/profile', profile.post);
 server.post('/', login.post);
 server.get('/', login.get);
 server.get('/sign-up', signup.get);
