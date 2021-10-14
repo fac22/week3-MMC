@@ -4,30 +4,55 @@ const model = require("../database/model.js");
 const db = require("../database/connection");
 const html = require("../routes/html.js");
 
+function howManyPotatoes(number) {
+  switch (number) {
+    case 1:
+      return '🥔';
+      break;
+    case 2:
+      return '🥔🥔';
+      break;
+    case 3:
+      return '🥔🥔🥔';
+      break;
+    case 4:
+      return '🥔🥔🥔🥔';
+      break;
+    case 5:
+      return '🥔🥔🥔🥔';
+      break;
+    default:
+      return '🥔';
+  }
+}
+
 async function get(request, response) {
   if (!request.signedCookies.sid) {
     response.redirect("/");
   } else {
     const { id } = await model.getSession(request.signedCookies.sid);
     const reviews = await model.getReviews(id);
-
+    const reviewsNumber = await Math.round(
+      ((await model.getReviews(id)).length * 1000) / 1.25
+    );
+    const name = await model.getUserName(id);
     const reviewHTML = reviews
-
       .map((review) => {
-        return `<li> ${review.film} - ${review.rating} - <button name='delete' value='${review.id}'>Delete</button></li>`;
-      })
-      .join("");
+        return `<li> ${review.film} - ${howManyPotatoes(
+          review.rating
+        )} - <button name='delete' value='${review.id}'>Delete</button></li>`;
+      }).join("");
 
     const HTML = `
-    <form method="POST" action='/delete'>
- <ul>${reviewHTML} </ul>
-  </form>
+    <header>Hey ${name.name} - ${reviewsNumber}  <form action="/log-out" method="POST">
+        <button>Log out</button>
+    </form></header>
+
     <form action="profile" method="POST">
     
     <h2>Add a new film</h2>
         <label for="film">Film Title</label>
         <input type="text" id="film" name="film" placeholder="Please enter the title of the film" required>
-
         <label for="rating">Rating</label>
         <select name="rating" id="rating">
           <option value="">--Please choose a rating--</option>
@@ -39,8 +64,9 @@ async function get(request, response) {
         </select>
     <button>Add Review 🍟</button>
     </form>
-    <form action="/log-out" method="POST">
-        <button>Log out</button>
+
+   <form method="POST" action='/delete'>
+      <ul>${reviewHTML} </ul>
     </form>
 `;
     return response.send(html.htmlBuilder("Profile Page", HTML));
