@@ -4,13 +4,7 @@ const auth = require('../auth.js');
 const html = require('./html.js');
 
 function get(request, response) {
-  const sid = request.signedCookies.sid;
-  if (sid) {
-    response.redirect('/profile');
-  }
-  response.send(
-    html(
-      `<h1>Hello, welcome to MMC!</h1>
+  const HTML = `<h1>Hello, welcome to MMC!</h1>
       <h2>Log in here</h2>
       <form action="/" method="POST">
         <label for="email">Email</label>
@@ -23,9 +17,12 @@ function get(request, response) {
       rs
       <button>Sign-Up</button>
       </form>
-    `
-    )
-  );
+    `;
+  const sid = request.signedCookies.sid;
+  if (sid) {
+    response.redirect('/profile');
+  }
+  response.send(html.htmlBuilder('Login', HTML));
 }
 
 function post(request, response) {
