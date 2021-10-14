@@ -1,17 +1,13 @@
 'use strict';
 
 const auth = require('../auth.js');
-const profile = require('../routes/profile.js');
-const html = require('../routes/html.js');
+const html = require('./html.js');
 
-// log in form
-// login form
 function get(request, response) {
   const sid = request.signedCookies.sid;
   if (sid) {
     response.redirect('/profile');
   }
-  //   response.send('<h1>Hello 😢</h1>');
   response.send(
     html(
       `<h1>Hello, welcome to MMC!</h1>
