@@ -14,13 +14,14 @@ async function get(request, response) {
     const reviewHTML = reviews
 
       .map((review) => {
-        return `<form method="POST" action='/delete'><li> ${review.film} - ${review.rating} - <button name='delete' value='${review.id}'>Delete</button></li></form>`;
+        return `<li> ${review.film} - ${review.rating} - <button name='delete' value='${review.id}'>Delete</button></li>`;
       })
       .join('');
 
     const HTML = `
+    <form method="POST" action='/delete'>
  <ul>${reviewHTML} </ul>
-  
+  </form>
     <form action="profile" method="POST">
     
     <h2>Add a new film</h2>
