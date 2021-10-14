@@ -1,7 +1,7 @@
-'use strict';
+"use strict";
 
 // const html = require('../routes/html.js');
-const auth = require('../auth.js');
+const auth = require("../auth.js");
 
 function get(request, response) {
   response.send(`
@@ -19,12 +19,12 @@ function get(request, response) {
 }
 
 function post(request, response) {
-  console.log('post from signup.js running');
+  console.log("post from signup.js running");
   const { name, email, password } = request.body;
   auth
     .createUserAuth(email, password, name)
-    .then(() => response.redirect('/'))
-    .catch((error) => console.error(error + 'CREATE USER ERROR'));
+    .then(() => response.redirect("/"))
+    .catch((error) => console.error(error + "CREATE USER ERROR"));
 }
 
 // name email password
