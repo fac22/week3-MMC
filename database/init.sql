@@ -1,6 +1,6 @@
 BEGIN;
 
-DROP TABLE IF EXISTS users, sessions CASCADE;
+DROP TABLE IF EXISTS users, sessions, potatoes CASCADE;
 
 CREATE TABLE users (
     id SERIAL PRIMARY KEY,
@@ -14,6 +14,14 @@ CREATE TABLE sessions (
    data JSON NOT NULL
 );
 
+CREATE TABLE potatoes (
+   id SERIAL PRIMARY KEY,
+   reviewer INTEGER REFERENCES users(id),
+   film TEXT NOT NULL,
+   rating INTEGER NOT NULL
+);
+
+
 INSERT INTO users (email, password, name) VALUES
 (
   'someone@gmail.com',
@@ -25,6 +33,13 @@ INSERT INTO sessions (sid, data) VALUES
 (
   'abc123',
   '{"test":"stuff"}'
+);
+
+INSERT INTO potatoes (reviewer, film, rating) VALUES
+(
+  1,
+  'The Matrix',
+  5
 );
 
 COMMIT;
