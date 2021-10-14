@@ -7,8 +7,8 @@ const server = express();
 
 // Requires
 
-const signup = require("./routes/signup.js");
-const login = require("./routes/login.js");
+const signup = require("./routes/signUp.js");
+const login = require("./routes/logIn.js");
 const profile = require("./routes/profile.js");
 const logOut = require("./routes/logOut.js");
 
