@@ -1,8 +1,8 @@
-"use strict";
+'use strict';
 
-const model = require("../database/model.js");
-const db = require("../database/connection");
-const html = require("../routes/html.js");
+const model = require('../database/model.js');
+const db = require('../database/connection');
+const html = require('../routes/html.js');
 
 async function get(request, response) {
   const { id } = await model.getSession(request.signedCookies.sid);
@@ -11,7 +11,7 @@ async function get(request, response) {
   const reviews = await model.getReviews(id);
   const reviewHTML = reviews
     .map((review) => `<li> ${review.film} - ${review.rating}</li>`)
-    .join("");
+    .join('');
   // console.log(model.getReviews(id));
   const HTML = `
  <ul>${reviewHTML} </ul>
@@ -33,13 +33,16 @@ async function get(request, response) {
         </select>
     <button>Add Review 🍟</button>
     </form>
+    <form action="/log-out" method="POST">
+        <button>Log out</button>
+    </form>
 `;
-  return response.send(html.htmlBuilder("Profile Page", HTML));
+  return response.send(html.htmlBuilder('Profile Page', HTML));
 }
 
 async function post(request, response) {
   const { id } = await model.getSession(request.signedCookies.sid);
-  console.log(id, "User Data 🔗");
+  console.log(id, 'User Data 🔗');
   const { film, rating } = await request.body;
   return model.createReview(id, film, rating);
 }
