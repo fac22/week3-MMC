@@ -8,10 +8,12 @@ async function get(request, response) {
   const { id } = await model.getSession(request.signedCookies.sid);
   const reviews = await model.getReviews(id);
   const reviewHTML = reviews
+
     .map((review) => {
       return `<form method="POST" action='/delete'><li> ${review.film} - ${review.rating} - <button name='delete' value='${review.id}'>Delete</button></li></form>`;
     })
     .join('');
+
   const HTML = `
  <ul>${reviewHTML} </ul>
   
@@ -31,6 +33,9 @@ async function get(request, response) {
           <option value="5">🥔🥔🥔🥔🥔</option>
         </select>
     <button>Add Review 🍟</button>
+    </form>
+    <form action="/log-out" method="POST">
+        <button>Log out</button>
     </form>
 `;
   return response.send(html.htmlBuilder('Profile Page', HTML));
