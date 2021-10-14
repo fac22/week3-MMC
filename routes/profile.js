@@ -32,7 +32,9 @@ async function get(request, response) {
   } else {
     const { id } = await model.getSession(request.signedCookies.sid);
     const reviews = await model.getReviews(id);
-    const reviewsNumber = await (await model.getReviews(id)).length;
+    const reviewsNumber = await Math.round(
+      ((await model.getReviews(id)).length * 1000) / 1.25
+    );
     const name = await model.getUserName(id);
     const reviewHTML = reviews
       .map((review) => {

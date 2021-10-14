@@ -1,11 +1,51 @@
-<!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
-  </head>
 
-  <body></body>
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Mouldy Potatoes 🥔 Film Reviews - Potatoes know best">
+  <link rel="stylesheet" href="style.css">
+  <title>Mouldy Potatoes 🥔 Profile Page</title>
+</head>
+
+<body>
+  <div id="bit-notification-bar-spacer" style="height: 42px;"></div>
+
+  <header>Hey Mo - 5600 <form action="/log-out" method="POST">
+      <button>Log out</button>
+    </form>
+  </header>
+
+  <form action="profile" method="POST">
+
+    <h2>Add a new film</h2>
+    <label for="film">Film Title</label>
+    <input type="text" id="film" name="film" placeholder="Please enter the title of the film" required="">
+    <label for="rating">Rating</label>
+    <select name="rating" id="rating">
+      <option value="">--Please choose a rating--</option>
+      <option value="1">🥔</option>
+      <option value="2">🥔🥔</option>
+      <option value="3">🥔🥔🥔</option>
+      <option value="4">🥔🥔🥔🥔</option>
+      <option value="5">🥔🥔🥔🥔🥔</option>
+    </select>
+    <button>Add Review 🍟</button>
+  </form>
+
+  <form method="POST" action="/delete">
+    <ul>
+      <li> sdf - 🥔🥔🥔🥔 - <button name="delete" value="20">Delete</button></li>
+      <li> sdfsdf - 🥔🥔🥔 - <button name="delete" value="19">Delete</button></li>
+      <li> sdf - 🥔🥔 - <button name="delete" value="18">Delete</button></li>
+      <li> asdasd - 🥔🥔 - <button name="delete" value="17">Delete</button></li>
+      <li> sd - 🥔🥔🥔🥔 - <button name="delete" value="15">Delete</button></li>
+      <li> fsdf - 🥔🥔🥔 - <button name="delete" value="14">Delete</button></li>
+      <li> fdfg - 🥔 - <button name="delete" value="12">Delete</button></li>
+    </ul>
+  </form>
+
+</body>
+
 </html>
