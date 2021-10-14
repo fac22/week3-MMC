@@ -34,6 +34,7 @@ async function get(request, response) {
     <button>Add Review 🍟</button>
     </form>
 `;
+
   return response.send(html.htmlBuilder("Profile Page", HTML));
 }
 
@@ -41,7 +42,9 @@ async function post(request, response) {
   const { id } = await model.getSession(request.signedCookies.sid);
   console.log(id, "User Data 🔗");
   const { film, rating } = await request.body;
-  return model.createReview(id, film, rating);
+  return model
+    .createReview(id, film, rating)
+    .then(() => response.redirect("/profile"));
 }
 
 module.exports = { get, post };
