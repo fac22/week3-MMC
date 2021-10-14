@@ -17,6 +17,11 @@ function getUser(email) {
   return database.query(SELECT_USER, [email]).then((user) => user.rows[0]);
 }
 
+function getUserName(id) {
+  const SELECT_USER = 'SELECT name FROM users WHERE id=$1';
+  return database.query(SELECT_USER, [id]).then((user) => user.rows[0]);
+}
+
 function getSession(sid) {
   const SELECT_SESSION = 'SELECT data FROM sessions WHERE sid=$1';
   return database.query(SELECT_SESSION, [sid]).then((result) => {
@@ -44,10 +49,10 @@ function createReview(userID, film, rating) {
 }
 
 function getReviews(userID) {
-  const SELECT_REVIEWS = `SELECT id, film, rating FROM potatoes WHERE reviewer = $1`;
+  const SELECT_REVIEWS = `SELECT id, film, rating FROM potatoes WHERE reviewer = $1
+  ORDER BY id DESC;`;
   return database.query(SELECT_REVIEWS, [userID]).then((review) => review.rows);
 }
-
 
 function deleteReview(id) {
   console.log('DELETE REVIEW MODEL.JS');
@@ -55,7 +60,7 @@ function deleteReview(id) {
   DELETE FROM potatoes WHERE id=$1;`;
   return database.query(DELETE_REVIEW, [id]);
 }
-  
+
 function deleteSession(sid) {
   const DELETE_SESSION = 'DELETE FROM sessions WHERE sid=$1';
   return database.query(DELETE_SESSION, [sid]);
@@ -64,13 +69,11 @@ function deleteSession(sid) {
 module.exports = {
   createUser,
   getUser,
+  getUserName,
   getSession,
   createSession,
   createReview,
   getReviews,
-
   deleteReview,
-
-  deleteSession
-
+  deleteSession,
 };
