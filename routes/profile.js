@@ -1,12 +1,12 @@
-'use strict';
+"use strict";
 
-const model = require('../database/model.js');
-const db = require('../database/connection');
-const html = require('../routes/html.js');
+const model = require("../database/model.js");
+const db = require("../database/connection");
+const html = require("../routes/html.js");
 
 async function get(request, response) {
   if (!request.signedCookies.sid) {
-    response.redirect('/');
+    response.redirect("/");
   } else {
     const { id } = await model.getSession(request.signedCookies.sid);
     const reviews = await model.getReviews(id);
@@ -16,7 +16,7 @@ async function get(request, response) {
       .map((review) => {
         return `<li> ${review.film} - ${review.rating} - <button name='delete' value='${review.id}'>Delete</button></li>`;
       })
-      .join('');
+      .join("");
 
     const HTML = `
     <form method="POST" action='/delete'>
@@ -43,25 +43,25 @@ async function get(request, response) {
         <button>Log out</button>
     </form>
 `;
-    return response.send(html.htmlBuilder('Profile Page', HTML));
+    return response.send(html.htmlBuilder("Profile Page", HTML));
   }
 }
 
 async function post(request, response) {
   const { id } = await model.getSession(request.signedCookies.sid);
-  console.log(id, 'User Data 🔗');
+  console.log(id, "User Data 🔗");
   const { film, rating } = await request.body;
   return model
     .createReview(id, film, rating)
-    .then(() => response.redirect('/profile'));
+    .then(() => response.redirect("/profile"));
 }
 
 async function deleteReview(request, response) {
-  console.log('DELETE FUNCTION IN PROFILE.JS');
+  console.log("DELETE FUNCTION IN PROFILE.JS");
   const body = await request.body;
   return model
     .deleteReview(body.delete)
-    .then(() => response.redirect('/profile'));
+    .then(() => response.redirect("/profile"));
 }
 
 module.exports = { get, post, deleteReview };

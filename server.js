@@ -6,16 +6,11 @@ const dotenv = require("dotenv");
 const server = express();
 
 // Requires
-<<<<<<< HEAD
+
 const signup = require("./routes/signup.js");
 const login = require("./routes/login.js");
 const profile = require("./routes/profile.js");
-=======
-const signup = require('./routes/signup.js');
-const login = require('./routes/logIn.js');
-const profile = require('./routes/profile.js');
-const logOut = require('./routes/logOut.js');
->>>>>>> 1be0c77746dc8c1859c11c6af192c0186fd58189
+const logOut = require("./routes/logOut.js");
 
 server.use(express.urlencoded({ extended: false }));
 server.use(express.static("./public"));
@@ -29,9 +24,9 @@ server.get("/", login.get);
 server.get("/sign-up", signup.get);
 server.post("/sign-up", signup.post);
 
-server.post('/delete', profile.deleteReview);
+server.post("/delete", profile.deleteReview);
 
-server.post('/log-out', logOut.post);
+server.post("/log-out", logOut.post);
 
 const PORT = process.env.PORT || 3003;
 
