@@ -1,8 +1,8 @@
-'use strict';
+"use strict";
 
-const model = require('../database/model.js');
-const db = require('../database/connection');
-const html = require('../routes/html.js');
+const model = require("../database/model.js");
+const db = require("../database/connection");
+const html = require("../routes/html.js");
 
 function howManyPotatoes(number) {
   switch (number) {
@@ -28,7 +28,7 @@ function howManyPotatoes(number) {
 
 async function get(request, response) {
   if (!request.signedCookies.sid) {
-    response.redirect('/');
+    response.redirect("/");
   } else {
     const { id } = await model.getSession(request.signedCookies.sid);
     const reviews = await model.getReviews(id);
@@ -41,8 +41,8 @@ async function get(request, response) {
         return `<li> ${review.film} - ${howManyPotatoes(
           review.rating
         )} - <button name='delete' value='${review.id}'>Delete</button></li>`;
-      })
-      .join('');
+      }).join("");
+
     const HTML = `
     <header>Hey ${name.name} - ${reviewsNumber}  <form action="/log-out" method="POST">
         <button>Log out</button>
@@ -69,25 +69,25 @@ async function get(request, response) {
       <ul>${reviewHTML} </ul>
     </form>
 `;
-    return response.send(html.htmlBuilder('Profile Page', HTML));
+    return response.send(html.htmlBuilder("Profile Page", HTML));
   }
 }
 
 async function post(request, response) {
   const { id } = await model.getSession(request.signedCookies.sid);
-  console.log(id, 'User Data 🔗');
+  console.log(id, "User Data 🔗");
   const { film, rating } = await request.body;
   return model
     .createReview(id, film, rating)
-    .then(() => response.redirect('/profile'));
+    .then(() => response.redirect("/profile"));
 }
 
 async function deleteReview(request, response) {
-  console.log('DELETE FUNCTION IN PROFILE.JS');
+  console.log("DELETE FUNCTION IN PROFILE.JS");
   const body = await request.body;
   return model
     .deleteReview(body.delete)
-    .then(() => response.redirect('/profile'));
+    .then(() => response.redirect("/profile"));
 }
 
 module.exports = { get, post, deleteReview };
