@@ -54,6 +54,16 @@ function getReviews(userID) {
   return database.query(SELECT_REVIEWS, [userID]).then((review) => review.rows);
 }
 
+function getAllReviews() {
+  const SELECT_REVIEWS = `SELECT film, rating FROM potatoes;`;
+  return database.query(SELECT_REVIEWS).then((review) => review.rows);
+}
+
+async function getRatings(film) {
+  const SELECT_REVIEWS = await `SELECT rating FROM potatoes WHERE film=$1;`;
+  return database.query(SELECT_REVIEWS, [film]).then((review) => review.rows);
+}
+
 function deleteReview(id) {
   console.log('DELETE REVIEW MODEL.JS');
   const DELETE_REVIEW = `
@@ -66,6 +76,10 @@ function deleteSession(sid) {
   return database.query(DELETE_SESSION, [sid]);
 }
 
+// function sortAllReviews(films) {
+//   const filmObj = films.map((film) => )
+// }
+
 module.exports = {
   createUser,
   getUser,
@@ -74,6 +88,8 @@ module.exports = {
   createSession,
   createReview,
   getReviews,
+  getAllReviews,
+  getRatings,
   deleteReview,
   deleteSession,
 };
