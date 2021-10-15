@@ -76,11 +76,11 @@ async function get(request, response) {
           <label class="hidden" for="rating">Rating</label>
           <select name="rating" id="rating">
             <option value="">Choose a rating</option>
-            <option value="1">🥔</option>
-            <option value="2">🥔🥔</option>
-            <option value="3">🥔🥔🥔</option>
-            <option value="4">🥔🥔🥔🥔</option>
-            <option value="5">🥔🥔🥔🥔🥔</option>
+            <option value="1" aria-describedby="1 Potato">🥔</option>
+            <option value="2" aria-describedby="2 Potatoes">🥔🥔</option>
+            <option value="3" aria-describedby="3 Potatoes">🥔🥔🥔</option>
+            <option value="4" aria-describedby="4 Potatoes">🥔🥔🥔🥔</option>
+            <option value="5" aria-describedby="5 Potatoes">🥔🥔🥔🥔🥔</option>
           </select>
           <button class="add--review">Add Review</button>
         </form>
